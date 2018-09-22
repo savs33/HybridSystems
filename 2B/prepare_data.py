@@ -8,7 +8,7 @@ def prep_categorical(df):
     categorical_columns = [' sex', ' mstatus', ' occupation', ' education']
     # enc = sklearn.preprocessing.OneHotEncoder()
     for cat_col in categorical_columns:
-        dfDummies = pd.get_dummies(df[cat_col], prefix='category')
+        dfDummies = pd.get_dummies(df[cat_col], prefix=str(cat_col)+'_cat_')
         df = pd.concat([df, dfDummies], axis=1)
     return df
 

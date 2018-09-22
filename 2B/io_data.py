@@ -1,13 +1,11 @@
 import pandas as pd
-import numpy as np
-import sklearn
 
 
 def read_csv(dataset='train'):
-    if dataset == 'valid_y':
-        df = pd.read_csv('data/Cust_Actual.csv')
-    elif dataset == 'valid_x':
-        df = pd.read_csv('data/custdatabase.csv')
+    if dataset == 'valid':
+        df_y = pd.read_csv('data/Cust_Actual.csv')
+        df_x = pd.read_csv('data/custdatabase.csv')
+        df = pd.merge(df_x, df_y, on='index', how='inner')
     elif dataset == 'train':
         df = pd.read_csv('data/trialPromoResults.csv')
     else:
@@ -16,7 +14,11 @@ def read_csv(dataset='train'):
 
 if __name__ == '__main__':
     df = read_csv(dataset='train')
-    df = read_csv(dataset='valid_y')
-    df = read_csv(dataset='valid_x')
     print(df.head())
     print(df.columns)
+    print(df.shape)
+
+    df = read_csv(dataset='valid')
+    print(df.head())
+    print(df.columns)
+    print(df.shape)
